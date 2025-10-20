@@ -24,7 +24,8 @@ public class ProprietarioController {
         proprietario2.setEmail("teste@gmail.com");
         proprietario2.setTelefone("46464464");
 
-       return Arrays.asList(proprietario1, proprietario2);
+
+        return Arrays.asList(proprietario1, proprietario2);
 
     }
 

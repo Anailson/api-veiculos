@@ -12,7 +12,7 @@ Vincular Proprietário a um Veículo (1:1).
 
 Registrar Autuações de um Veículo (0..*), com valor e data de ocorrência.
 
-A modelagem segue a imagem do diagrama de classes (UML). Sugestão: salve o arquivo do diagrama em docs/diagrama-classes.png e referencie no projeto.
+A modelagem segue a imagem do diagrama de classes (UML). Sugestão: salve o arquivo do diagrama em docs/diagrama-classes.jpg e referencie no projeto.
 
 🧠 Modelo de domínio
 
