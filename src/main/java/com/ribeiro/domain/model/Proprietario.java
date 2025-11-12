@@ -1,6 +1,5 @@
 package com.ribeiro.domain.model;
 
-
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
