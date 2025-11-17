@@ -1,5 +1,6 @@
 package com.ribeiro.controller;
 
+import com.ribeiro.domain.exception.NegocioException;
 import com.ribeiro.domain.model.Proprietario;
 import com.ribeiro.domain.repository.ProprietarioRepository;
 import com.ribeiro.domain.service.RegistroProprietarioService;
@@ -25,7 +26,7 @@ public class ProprietarioController {
     }
 
     @GetMapping("/{proprietarioId}")
-    public ResponseEntity<Proprietario> buscar(@PathVariable  Long proprietarioId) {
+    public ResponseEntity<Proprietario> buscar(@PathVariable Long proprietarioId) {
         return proprietarioRepository.findById(proprietarioId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -63,5 +64,11 @@ public class ProprietarioController {
         return ResponseEntity.noContent().build();
 
     }
+
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<String> capturar(NegocioException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
 
 }

@@ -21,7 +21,7 @@ public class RegistroProprietarioService {
                 .isPresent();
 
         if (emailEmUso) {
-            throw new NegocioException("Já existe um proprietário cadastrado com esse endereço");
+            throw new NegocioException("Já existe um proprietário cadastrado com esse endereço de e-mail");
         }
 
         return proprietarioRepository.save(proprietario);
