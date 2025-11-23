@@ -1,7 +1,7 @@
 package com.ribeiro.controller;
 
 
-import com.ribeiro.domain.model.Proprietario;
+import com.ribeiro.domain.exception.NegocioException;
 import com.ribeiro.domain.model.Veiculo;
 import com.ribeiro.domain.repository.VeiculoRepository;
 import com.ribeiro.domain.service.RegistroVeiculoService;
@@ -39,5 +39,12 @@ public class VeiculoController {
         return registroVeiculoService.cadastrar(veiculo);
 
     }
+
+
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<String> capturar(NegocioException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
 
 }
