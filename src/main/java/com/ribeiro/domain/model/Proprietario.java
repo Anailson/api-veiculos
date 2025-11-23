@@ -1,5 +1,6 @@
 package com.ribeiro.domain.model;
 
+import com.ribeiro.domain.validation.ValidationGroups;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,7 +17,7 @@ import lombok.Setter;
 //@Table(name = "tb_proprietario")
 public class Proprietario {
 
-    @NotNull
+    @NotNull(groups = ValidationGroups.ProprietarioId.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
