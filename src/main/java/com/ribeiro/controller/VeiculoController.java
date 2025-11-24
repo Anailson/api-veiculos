@@ -5,6 +5,7 @@ import com.ribeiro.domain.exception.NegocioException;
 import com.ribeiro.domain.model.Veiculo;
 import com.ribeiro.domain.repository.VeiculoRepository;
 import com.ribeiro.domain.service.RegistroVeiculoService;
+import com.ribeiro.model.VeiculoModel;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,19 @@ public class VeiculoController {
     }
 
     @GetMapping("/{veiculoId}")
-    public ResponseEntity<Veiculo> buscar(@PathVariable Long veiculoId) {
+    public ResponseEntity<VeiculoModel> buscar(@PathVariable Long veiculoId) {
         return veiculoRepository.findById(veiculoId)
+                .map(veiculo -> {
+                    var veiculoModel = new VeiculoModel();
+                    veiculoModel.setId(veiculo.getId());
+                    veiculoModel.setNomeProprietario(veiculo.getProprietario().getNome());
+                    veiculoModel.setMarca(veiculo.getMarca());
+                    veiculoModel.setModelo(veiculo.getModelo());
+                    veiculoModel.setNumeroPlaca(veiculo.getPlaca());
+                    veiculoModel.setStatus(veiculo.getStatus());
+                    veiculoModel.setDataApreensao(veiculo.getDataApreensao());
+                    return  veiculoModel;
+                })
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

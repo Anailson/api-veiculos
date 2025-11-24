@@ -38,5 +38,4 @@ public class Proprietario {
     private String telefone;
 
 
-
 }
