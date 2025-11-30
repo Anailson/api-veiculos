@@ -2,6 +2,7 @@ package com.ribeiro.controller;
 
 import com.ribeiro.assembler.VeiculoAssembler;
 import com.ribeiro.domain.model.Veiculo;
+import com.ribeiro.domain.model.input.VeiculoInput;
 import com.ribeiro.domain.repository.VeiculoRepository;
 import com.ribeiro.domain.service.RegistroVeiculoService;
 import com.ribeiro.model.VeiculoModel;
@@ -37,8 +38,12 @@ public class VeiculoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public VeiculoModel cadastrar(@Valid @RequestBody Veiculo veiculo) {
-        return veiculoAssembler.toModel(registroVeiculoService.cadastrar(veiculo));
+    public VeiculoModel cadastrar(@Valid @RequestBody VeiculoInput veiculoInput) {
+        Veiculo novoVeiculo = veiculoAssembler.toEntity(veiculoInput);
+        Veiculo veiculoCadastrado = registroVeiculoService.cadastrar(novoVeiculo);
+
+        return veiculoAssembler.toModel(veiculoCadastrado);
+
     }
 
 }
