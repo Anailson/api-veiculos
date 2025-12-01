@@ -2,7 +2,9 @@ package com.ribeiro.domain.service;
 
 import com.ribeiro.domain.exception.NegocioException;
 import com.ribeiro.domain.model.Proprietario;
+import com.ribeiro.domain.model.Veiculo;
 import com.ribeiro.domain.repository.ProprietarioRepository;
+import com.ribeiro.domain.repository.VeiculoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ public class RegistroProprietarioService {
 
 
     private final ProprietarioRepository proprietarioRepository;
+    private final VeiculoRepository veiculoRepository;
 
     public Proprietario buscar(Long proprietarioId) {
         return proprietarioRepository.findById(proprietarioId)
@@ -36,5 +39,7 @@ public class RegistroProprietarioService {
     public void excluir(Long proprietarioId) {
         proprietarioRepository.deleteById(proprietarioId);
     }
+
+
 
 }
