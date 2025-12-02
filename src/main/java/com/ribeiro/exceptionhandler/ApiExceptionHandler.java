@@ -1,5 +1,6 @@
 package com.ribeiro.exceptionhandler;
 
+import com.ribeiro.domain.exception.EntidadeNaoEncontradaException;
 import com.ribeiro.domain.exception.NegocioException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -49,6 +50,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle(e.getMessage());
         problemDetail.setType(URI.create("https://algatransito.com/erros/regra-de-negocio"));
+
+        return problemDetail;
+    }
+
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    public ProblemDetail handleEntidadeNaoEncontrada(NegocioException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problemDetail.setTitle(e.getMessage());
+        problemDetail.setType(URI.create("https://algatransito.com/erros/nao-encontrado"));
 
         return problemDetail;
     }

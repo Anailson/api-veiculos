@@ -1,5 +1,6 @@
 package com.ribeiro.domain.service;
 
+import com.ribeiro.domain.exception.EntidadeNaoEncontradaException;
 import com.ribeiro.domain.exception.NegocioException;
 import com.ribeiro.domain.model.Proprietario;
 import com.ribeiro.domain.model.StatusVeiculo;
@@ -46,7 +47,7 @@ public class RegistroVeiculoService {
 
     public Veiculo buscar(Long veiculoId) {
         return veiculoRepository.findById(veiculoId)
-                .orElseThrow(() -> new NegocioException("Proprietário não encontrado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Veículo não encontrado"));
     }
 
 }
