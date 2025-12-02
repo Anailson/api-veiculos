@@ -4,6 +4,7 @@ import com.ribeiro.assembler.VeiculoAssembler;
 import com.ribeiro.domain.model.Veiculo;
 import com.ribeiro.domain.model.input.VeiculoInput;
 import com.ribeiro.domain.repository.VeiculoRepository;
+import com.ribeiro.domain.service.ApreensaoVeiculoService;
 import com.ribeiro.domain.service.RegistroVeiculoService;
 import com.ribeiro.model.VeiculoModel;
 import jakarta.validation.Valid;
@@ -22,6 +23,7 @@ public class VeiculoController {
     private final VeiculoRepository veiculoRepository;
     private final RegistroVeiculoService registroVeiculoService;
     private final VeiculoAssembler veiculoAssembler;
+    private final ApreensaoVeiculoService apreensaoVeiculoService;
 
     @GetMapping
     public List<VeiculoModel> listar() {
@@ -44,6 +46,18 @@ public class VeiculoController {
 
         return veiculoAssembler.toModel(veiculoCadastrado);
 
+    }
+
+    @PutMapping("/{veiculoId}/apreensao")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void apreender(@PathVariable Long veiculoId) {
+        apreensaoVeiculoService.apreender(veiculoId);
+    }
+
+    @DeleteMapping("/{veiculoId}/apreensao")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removerApreensao(@PathVariable Long veiculoId) {
+        apreensaoVeiculoService.removerApreensao(veiculoId);
     }
 
 }
