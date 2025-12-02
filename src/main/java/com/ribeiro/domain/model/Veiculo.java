@@ -1,6 +1,7 @@
 package com.ribeiro.domain.model;
 
 
+import com.ribeiro.domain.exception.NegocioException;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -50,5 +51,30 @@ public class Veiculo {
         return autuacao;
     }
 
+
+    public void apreender() {
+        if (estaApreendido()) {
+            throw new NegocioException("Veículo já se encontra apreendido");
+        }
+
+        setStatus(StatusVeiculo.APREENDIDO);
+        setDataApreensao(OffsetDateTime.now());
+    }
+
+    public void removerApreensao() {
+        if (naoEstaApreendido()) {
+            throw new NegocioException("Veículo não está apreendido");
+        }
+        setStatus(StatusVeiculo.REGULAR);
+        setDataApreensao(null);
+    }
+
+    public boolean estaApreendido() {
+        return StatusVeiculo.APREENDIDO.equals(getStatus());
+    }
+
+    public boolean naoEstaApreendido() {
+        return !estaApreendido();
+    }
 
 }
